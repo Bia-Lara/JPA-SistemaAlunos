@@ -12,9 +12,17 @@ public class AlunoDao {
 
     public AlunoDao(EntityManager em) {this.em = em;}
 
-    public void register(Aluno aluno){em.persist(aluno);}
+    public void register(Aluno aluno){
+        em.getTransaction().begin();
+        em.persist(aluno);
+        em.getTransaction().commit();
+    }
 
-    public void remove(Aluno aluno){em.remove(aluno);}
+    public void remove(Aluno aluno){
+        em.getTransaction().begin();
+        em.remove(aluno);
+        em.getTransaction().commit();
+    }
 
     public Optional<Aluno> findByName(String name){
         Objects.requireNonNull(name, "Nome cannot be null");
@@ -23,6 +31,7 @@ public class AlunoDao {
             String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
             Aluno aluno = em.createQuery(jpql, Aluno.class)
                     .setParameter("n", name)
+                    .setMaxResults(1)
                     .getSingleResult();
             return Optional.of(aluno);
         } catch (jakarta.persistence.NoResultException e) {

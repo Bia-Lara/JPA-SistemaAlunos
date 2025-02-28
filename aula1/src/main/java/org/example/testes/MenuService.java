@@ -49,6 +49,7 @@ public class MenuService {
     }
 
     public static void excludeStudentFromDB() {
+        System.out.println("insira o nome do aluno: ");
         String name = scanner.nextLine();
         exclude(name);
     }
