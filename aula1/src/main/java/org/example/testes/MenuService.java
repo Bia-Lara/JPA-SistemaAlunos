@@ -6,6 +6,7 @@ import org.example.modelo.Aluno;
 import org.example.util.JPAUtil;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuService {
@@ -52,15 +53,18 @@ public class MenuService {
         exclude(name);
     }
 
+    public static void listStudents() {
+        dao.findAll().forEach(System.out::println);
+    }
+
     //funcoes auxiliares
     private static void register(Aluno aluno, AlunoDao dao) {
         dao.register(aluno);
     }
 
-    public static void exclude(String name) {
+    private static void exclude(String name) {
         Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student does not exists"));
         dao.remove(student);
     };
-
 
 }
