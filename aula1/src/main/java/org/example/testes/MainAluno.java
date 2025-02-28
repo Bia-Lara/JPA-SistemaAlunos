@@ -35,44 +35,12 @@ public class MainAluno {
             scanner.nextLine();
 
             switch (opcao){
-                case 1:
-                    System.out.println("CADASTRO DE ALUNO: ");
-                    System.out.println("Digite o nome: ");
-                    nome = scanner.nextLine();
-
-                    System.out.println("Digite o RA: ");
-                    ra = scanner.nextLine();
-
-                    System.out.println("Digite o email: ");
-                    email = scanner.nextLine();
-
-                    System.out.println("Digite a nota 1: ");
-                    n1 = scanner.nextBigDecimal();
-                    scanner.nextLine();
-
-                    System.out.println("Digite a nota 2: ");
-                    n2 = scanner.nextBigDecimal();
-
-
-                    System.out.println("Digite a nota 3: ");
-                    n3 = scanner.nextBigDecimal();
-
-                    a = new Aluno(nome, ra, email, n1,n2,n3);
-
-                    register(a, dao);
-
+                case 1: MenuServices.addUserToDB(opcao);
+                case 2:
             }
 
         }while (opcao !=6);
 
 
     }
-
-    public static void register(Aluno a, AlunoDao dao){
-        em.getTransaction().begin();
-        dao.register(a);
-
-        em.getTransaction().commit();
-        em.close();    }
-
 }
