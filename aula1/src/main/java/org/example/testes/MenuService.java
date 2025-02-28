@@ -8,19 +8,18 @@ import org.example.util.JPAUtil;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class MenuServices {
+public class MenuService {
+    public static Scanner scanner = new Scanner(System.in);
+    public static EntityManager em = JPAUtil.getEntityManager();
+    public static AlunoDao dao = new AlunoDao(em);
 
-    public MenuServices() {
+    public MenuService() {
     }
 
-    public static void addUserToDB(int option) {
-        Scanner scanner = new Scanner(System.in);
+    public static void addUserToDB() {
         String nome, ra, email;
         BigDecimal n1,n2,n3;
         Aluno a;
-
-        EntityManager em = JPAUtil.getEntityManager();
-        AlunoDao dao = new AlunoDao(em);
 
         System.out.println("CADASTRO DE ALUNO: ");
         System.out.println("Digite o nome: ");
@@ -48,10 +47,19 @@ public class MenuServices {
         register(a, dao);
     }
 
+    public static void excludeStudentFromDB() {
+        String name = scanner.nextLine();
+        exclude(name);
+    }
+
     //funcoes auxiliares
     private static void register(Aluno aluno, AlunoDao dao) {
         dao.register(aluno);
     }
+
+    public static void exclude(String name) {
+
+    };
 
 
 }

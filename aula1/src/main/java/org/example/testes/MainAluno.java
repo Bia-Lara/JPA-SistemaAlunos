@@ -35,8 +35,8 @@ public class MainAluno {
             scanner.nextLine();
 
             switch (opcao){
-                case 1: MenuServices.addUserToDB(opcao);
-                case 2:
+                case 1: MenuService.addUserToDB();
+                case 2: MenuService.excludeStudentFromDB();
             }
 
         }while (opcao !=6);
