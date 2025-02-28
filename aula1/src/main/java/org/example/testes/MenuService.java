@@ -58,7 +58,8 @@ public class MenuService {
     }
 
     public static void exclude(String name) {
-
+        Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student does not exists"));
+        dao.remove(student);
     };
 
 
