@@ -55,35 +55,43 @@ public class MenuService {
     public static void findByName() {
         System.out.println("insira o nome do aluno: ");
         String name = scanner.nextLine();
-        Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student with the provided name not found"));
-        System.out.println(student);
+        try {
+            Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student with the provided name not found"));
+            System.out.println(student);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Aluno não encontrado!");
+        }
     }
 
     public static void updateStudent() {
         System.out.println("nome do aluno: ");
         String name = scanner.nextLine();
-        Aluno aluno = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student with the provided name not found"));
-        String nome, ra, email;
-        BigDecimal n1,n2,n3;
+        try {
+            Aluno aluno = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student with the provided name not found"));
+            String nome, ra, email;
+            BigDecimal n1,n2,n3;
 
-        System.out.println("NOVOS DADOS: ");
-        System.out.println("Digite o nome: ");
-        nome = scanner.nextLine();
-        System.out.println("Digite o RA: ");
-        ra = scanner.nextLine();
-        System.out.println("Digite o email: ");
-        email = scanner.nextLine();
-        System.out.println("Digite a nota 1: ");
-        n1 = scanner.nextBigDecimal();
-        scanner.nextLine();
-        System.out.println("Digite a nota 2: ");
-        n2 = scanner.nextBigDecimal();
-        System.out.println("Digite a nota 3: ");
-        n3 = scanner.nextBigDecimal();
+            System.out.println("NOVOS DADOS: ");
+            System.out.println("Digite o nome: ");
+            nome = scanner.nextLine();
+            System.out.println("Digite o RA: ");
+            ra = scanner.nextLine();
+            System.out.println("Digite o email: ");
+            email = scanner.nextLine();
+            System.out.println("Digite a nota 1: ");
+            n1 = scanner.nextBigDecimal();
+            scanner.nextLine();
+            System.out.println("Digite a nota 2: ");
+            n2 = scanner.nextBigDecimal();
+            System.out.println("Digite a nota 3: ");
+            n3 = scanner.nextBigDecimal();
 
-        Aluno newStudent = new Aluno(nome, ra, email, n1,n2,n3);
+            Aluno newStudent = new Aluno(nome, ra, email, n1,n2,n3);
 
-        dao.update(aluno, newStudent);
+            dao.update(aluno, newStudent);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Aluno não encontrado!");
+        }
     }
 
     //funcoes auxiliares
@@ -92,8 +100,12 @@ public class MenuService {
     }
 
     private static void exclude(String name) {
-        Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student does not exists"));
-        dao.remove(student);
+        try {
+            Aluno student = dao.findByName(name).orElseThrow(() -> new IllegalArgumentException("Student does not exists"));
+            dao.remove(student);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Aluno não encontrado!");
+        }
     };
 
 }

@@ -15,15 +15,7 @@ public class MainAluno {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-
-        String nome, ra, email;
-        BigDecimal n1,n2,n3;
         int opcao;
-
-        Aluno a;
-        AlunoDao dao = new AlunoDao(em);
-
         do {
             System.out.println("\nMenu:");
             System.out.println("1 - Cadastrar Aluno");
@@ -35,7 +27,6 @@ public class MainAluno {
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
-
             switch (opcao){
                 case 1 -> MenuService.addUserToDB();
                 case 2 -> MenuService.excludeStudentFromDB();
@@ -43,7 +34,6 @@ public class MainAluno {
                 case 4 -> MenuService.findByName();
                 case 5 -> MenuService.listStudents();
             }
-
         }while (opcao !=6);
 
 
