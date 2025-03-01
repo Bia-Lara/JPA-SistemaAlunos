@@ -8,6 +8,8 @@ import org.example.util.JPAUtil;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+//Fhelippe Guedes Damasceno Pereira e Ana Beatriz Lara Giampedro
+
 public class MainAluno {
     static EntityManager em = JPAUtil.getEntityManager();
 
