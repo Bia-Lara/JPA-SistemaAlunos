@@ -39,20 +39,23 @@ public class AlunoDao {
         }
     }
 
-    public void update(Aluno a){
+    public void update(Aluno a, Aluno newStudent){
 
         Objects.requireNonNull(a, "Aluno cannot be null");
 
         String jpql = "UPDATE Aluno a SET a.nome = :nome, a.ra = :ra, a.email = :email, a.nota1 = :n1, a.nota2 = :n2, a.nota3 = :n3 WHERE a.id = :id";
-        em.createQuery(jpql, Aluno.class)
+        em.getTransaction().begin();
+        em.createQuery(jpql)
                 .setParameter("id", a.getId())
-                .setParameter("email", a.getEmail())
-                .setParameter("nome", a.getNome())
-                .setParameter("ra", a.getRa())
-                .setParameter("n1", a.getNota1())
-                .setParameter("n2", a.getNota2())
-                .setParameter("n3", a.getNota3())
+                .setParameter("email", newStudent.getEmail())
+                .setParameter("nome", newStudent.getNome())
+                .setParameter("ra", newStudent.getRa())
+                .setParameter("n1", newStudent.getNota1())
+                .setParameter("n2", newStudent.getNota2())
+                .setParameter("n3", newStudent.getNota3())
                 .executeUpdate();
+        em.getTransaction().commit();
+        em.refresh(a);
     }
 
     public Stream<Aluno> findAll(){

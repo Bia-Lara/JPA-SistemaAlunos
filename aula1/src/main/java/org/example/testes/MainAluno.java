@@ -36,7 +36,9 @@ public class MainAluno {
 
             switch (opcao){
                 case 1 -> MenuService.addUserToDB();
-                case 2 ->  MenuService.excludeStudentFromDB();
+                case 2 -> MenuService.excludeStudentFromDB();
+                case 3 -> MenuService.updateStudent();
+                case 4 -> MenuService.findByName();
                 case 5 -> MenuService.listStudents();
             }
 
